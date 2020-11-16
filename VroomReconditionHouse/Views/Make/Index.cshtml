@@ -1,0 +1,41 @@
+﻿@model IEnumerable<VroomReconditionHouse.Models.Make>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-info"> Makes of Vehicle</h2>
+    </div>
+    <div class="col-6 text-right">
+        <a class="btn btn-info" asp-action="Create"><i class="fa fa-motorcycle"></i>&nbsp;Add New Make</a>
+    </div>
+    <div class="col-12">
+        <table class="table table-striped border">
+            <tr class="table-info">
+                <th>
+                    @Html.DisplayNameFor(m=>m.Name)
+                </th>
+                <th></th>
+            </tr>
+            @foreach(var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m=>item.Name)
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <a  type="button" class="btn btn-primary" href="@Url.Action("Edit", "Make", new {Id = @item.Id})"> <i class="fa fa-edit"></i>&nbsp; Edit </a>
+                            <form method="post" action="Delete">
+                                <button type="submit" onclick="if (confirm('Are you sure you want to delete this')) { return true}" class="btn btn-danger rounded" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash-alt"></i>&nbsp; Delete</button>
+                            </form>
+                        </div>
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
